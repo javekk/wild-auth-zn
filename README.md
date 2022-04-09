@@ -1,2 +1,2 @@
 # wild-auth-zn
-Authentication API developed in nodejs 
+Authentication API developed with Nodejs,
