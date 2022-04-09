@@ -1,0 +1,19 @@
+{
+  "name": "wild-auth-zn",
+  "version": "1.0.0",
+  "description": "Authentication API developed using Nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/javekk/wild-auth-zn.git"
+  },
+  "author": "Raffaele Perini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/javekk/wild-auth-zn/issues"
+  },
+  "homepage": "https://github.com/javekk/wild-auth-zn#readme"
+}
