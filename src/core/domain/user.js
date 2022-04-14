@@ -7,3 +7,5 @@ class User{
         this.role = role
     }
 }
+
+export default User;
