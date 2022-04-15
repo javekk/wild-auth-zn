@@ -1,9 +1,8 @@
-import { Router } from 'express';
-var router = Router();
 
+ping = async (req, res, next) => {
+  res.end()
+}
 
-router.get('/ping', function(req, res, next) {
-  res.end();
-});
-
-export default router;
+module.exports = {
+  ping
+}

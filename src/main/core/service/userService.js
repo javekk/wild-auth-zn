@@ -2,7 +2,6 @@ const appRoot = require('app-root-path');
 const userAdapter = require(appRoot + '/src/main/door/outbound/database/adapter/userAdapter');
 
 
-
 async function getAll() {
     return await userAdapter.getAll();
 }

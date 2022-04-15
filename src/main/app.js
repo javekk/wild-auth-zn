@@ -1,11 +1,11 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
+const appRoot = require('app-root-path');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const logger = require('morgan');
+const routes = require(appRoot + '/src/main/door/inbound/route/route')
 
-var indexRouter = require('./door/inbound/route/controller/index');
-
-var app = express();
+const app = express();
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -14,7 +14,7 @@ app.use(express.urlencoded({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/api', routes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

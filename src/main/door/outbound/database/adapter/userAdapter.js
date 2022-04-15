@@ -34,7 +34,7 @@ function toBL(user) {
 // adapters
 
 async function getAll() {
-    return await userRepo.getAll().map(user => toBL(user));
+    return (await userRepo.getAll()).map(user => toBL(user));
 }
 
 async function getById(id) {

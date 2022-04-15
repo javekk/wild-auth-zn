@@ -55,7 +55,7 @@ t.test('Get all users correctly', async t => {
 
     t.test(
         'check size',
-        async t => t.equal(users.length, 2)
+        async t => t.equal(2, users.length)
     )
 })
 

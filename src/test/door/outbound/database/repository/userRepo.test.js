@@ -8,7 +8,7 @@ t.test('Get all users correctly', async t => {
 
     t.test(
         'check size',
-        async t => t.equal(users.length, 4)
+        async t => t.equal(4, users.length)
     )
     t.test(
         'check no one has the password exposed',

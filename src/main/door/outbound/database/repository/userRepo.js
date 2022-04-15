@@ -51,7 +51,7 @@ async function getById(id) {
 }
 
 async function createUser(user) {
-    user.id = Math.max(...users.map(u => u.id));
+    user.id = Math.max(...users.map(u => u.id)) + 1;
     users.push(user)
     delete user.password;
     return user
