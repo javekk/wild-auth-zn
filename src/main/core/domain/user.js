@@ -1,3 +1,5 @@
+export default User;
+
 class User{
     constructor(id, username, firstName, lastName, role) {
         this.id = id;
@@ -7,5 +9,3 @@ class User{
         this.role = role
     }
 }
-
-export default User;
