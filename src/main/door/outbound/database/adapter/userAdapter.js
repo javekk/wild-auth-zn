@@ -33,16 +33,16 @@ function toBL(user) {
 
 // adapters
 
-async function getAll() {
+const getAll = async () => {
     return (await userRepo.getAll()).map(user => toBL(user));
 }
 
-async function getById(id) {
+const getById = async (id) => {
     const user = await userRepo.getById(id);
     return toBL(user);
 }
 
-async function createUser(user) {
+const createUser = async (user) => {
     const createdUser = await userRepo.createUser(toDB(user));
     return toBL(createdUser);
 }

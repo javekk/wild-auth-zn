@@ -2,15 +2,15 @@ const appRoot = require('app-root-path');
 const userAdapter = require(appRoot + '/src/main/door/outbound/database/adapter/userAdapter');
 
 
-async function getAll() {
+getAll = async () => {
     return await userAdapter.getAll();
 }
 
-async function getById(id) {
+getById = async (id) => {
     return await userAdapter.getById(id);
 }
 
-async function createUser(user) {
+createUser = async (user) => {
     // validation layer etc...
     return await userAdapter.createUser(user);
 }

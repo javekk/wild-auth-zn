@@ -33,14 +33,15 @@ const users = [{
     }
 ];
 
-async function getAll() {
+
+const getAll = async () => {
     return users.map(user => {
         delete user.password;
         return user;
     });
 }
 
-async function getById(id) {
+const getById = async (id) => {
     const user = users.find(u => u.id === parseInt(id));
     if (!user)
         return;
@@ -50,7 +51,7 @@ async function getById(id) {
     }
 }
 
-async function createUser(user) {
+const createUser = async (user) => {
     user.id = Math.max(...users.map(u => u.id)) + 1;
     users.push(user)
     delete user.password;
