@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Authentication API developed using Nodejs",
   "scripts": {
-    "start": "node ./src/bin/www",
+    "start": "node ./src/main/bin/www",
     "test": "tap"
   },
   "repository": {
