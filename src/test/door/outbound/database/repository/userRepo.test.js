@@ -1,6 +1,5 @@
 const appRoot = require('app-root-path');
-const t = require('tap')
-
+const t = require('tap');
 const userRepo = require(appRoot + '/src/main/door/outbound/database/repository/userRepo.js');
 
 t.test('Get all users correctly', async t => {

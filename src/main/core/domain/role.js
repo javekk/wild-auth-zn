@@ -1,3 +1,5 @@
-export const SuperAdmin = 'SuperAdmin';
-export const Admin = 'Admin';
-export const User = 'User';
+module.exports = {
+    SuperAdmin : 'SuperAdmin',
+    Admin: 'Admin',
+    User: 'User',
+}
