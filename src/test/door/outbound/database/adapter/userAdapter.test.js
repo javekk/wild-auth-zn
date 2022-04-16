@@ -95,6 +95,41 @@ t.test('GIVEN a NOT existing user id THEN null is retrieved', async t => {
 
 
 
+t.test('GIVEN an existing username THEN the user is retrieved correctly', async t => {
+
+    const username = 'user1'
+    const mFun = sinon.stub(userRepo, "getByUsername");
+    mFun.withArgs(username).returns(usersFromDb[0])
+
+    const user = await userAdapter.getByUsername(username)
+
+    t.test(
+        'check it is retrieved correctly',
+        async t => t.ok(user)
+    )
+    t.test(
+        'check correct id',
+        async t => t.ok(username, user.username)
+    )
+})
+
+
+t.test('GIVEN a NOT existing user id THEN null is retrieved', async t => {
+
+    const username = 'Franco'
+    const mFun = sinon.stub(userRepo, "getByUsername");
+    mFun.withArgs(username).returns()
+
+    const user = await userAdapter.getByUsername(username)
+
+    t.test(
+        'check it is null',
+        async t => t.notOk(user)
+    )
+})
+
+
+
 t.test('GIVEN a new user object THEN it is persisted correctly', async t => {
 
     const userToPersit = new User(

@@ -31,7 +31,7 @@ const toBL = (user) => {
 }
 
 
-// adapters
+// dao
 
 const getAll = async () => {
     return (await userRepo.getAll()).map(user => toBL(user));
@@ -39,6 +39,11 @@ const getAll = async () => {
 
 const getById = async (id) => {
     const user = await userRepo.getById(id);
+    return toBL(user);
+}
+
+const getByUsername = async (username) => {
+    const user = await userRepo.getByUsername(username);
     return toBL(user);
 }
 
@@ -51,5 +56,6 @@ const createUser = async (user) => {
 module.exports = {
     getAll,
     getById,
+    getByUsername,
     createUser,
 };

@@ -6,28 +6,41 @@ const {
 const userService = require(appRoot + '/src/main/core/service/userService');
 
 
-getAll = async (req, res, next) => {
+const login = async (req, res, next) => {
+    const { username, password } = req.body;
+    try {
+        const token = await userService.login(username, password);
+        res.status(200).json({ Bearer: token })
+    } catch(error) {
+        if (error == 'User not found' || error == 'Wrong password')
+            next(createError(400, error));  
+        else 
+            next(createError(500));  
+    }
+}
+
+const getAll = async (req, res, next) => {
     const users = await userService.getAll();
     res.status(200).json(users);
 }
 
-getById = async (req, res, next) => {
+const getById = async (req, res, next) => {
     const id = req.params.id;
     const user = await userService.getById(id);
     if (user)
         res.status(200).json(user);        
     else
-        return next(createError(404));
+        next(createError(404, 'user not found'));
 }
 
-createUser = async (req, res, next) => {
+const createUser = async (req, res, next) => {
     try {
         const newUser = req.body
         const createdUser = await userService.createUser(newUser);
         if (createdUser)
             res.status(201).json(createdUser);
         else
-            return next(createError(500));
+            next(createError(500));
     } catch (error) {
         next(error)
     }
@@ -35,6 +48,7 @@ createUser = async (req, res, next) => {
 
 
 module.exports = {
+    login,
     getAll,
     getById,
     createUser,

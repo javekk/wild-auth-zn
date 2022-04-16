@@ -46,7 +46,15 @@ const getById = async (id) => {
     if (!user)
         return;
     else {
-        delete user.password;
+        return user;
+    }
+}
+
+const getByUsername = async (username) => {
+    const user = users.find(u => u.username === username);
+    if (!user)
+        return;
+    else {
         return user;
     }
 }
@@ -62,5 +70,6 @@ const createUser = async (user) => {
 module.exports = {
     getAll,
     getById,
+    getByUsername,
     createUser,
 };

@@ -7,6 +7,8 @@ const userController = require(appRoot + '/src/main/door/inbound/route/controlle
 
 router.get('/ping', index.ping);
 
+router.post('/login', userController.login);
+
 router.get('/user', userController.getAll);
 router.get('/user/:id', userController.getById);
 router.post('/user', userController.createUser);

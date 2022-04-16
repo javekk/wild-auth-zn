@@ -42,14 +42,17 @@ const usersFromDb = [
     ),
 ];
 
-let status; 
-let json; 
-let res; 
+let status;
+let json;
+let res;
 
 t.beforeEach(t => {
     status = sinon.stub();
     json = sinon.spy();
-    res = { json, status };
+    res = {
+        json,
+        status
+    };
     status.returns(res);
 })
 
@@ -57,8 +60,103 @@ t.afterEach(t => {
     sinon.restore()
 })
 
-// test
 
+
+// LOGIN
+
+t.test('GIVEN a NOT existing username WHEN the login process is called THEN an error is retrieved', async t => {
+
+    const username = 'bruno'
+    const password = 'superquattro'
+
+    const req = {
+        body: {
+            username: username,
+            password: password
+        }
+    }
+    const next = () => {};
+
+    const mFun = sinon.stub(userService, "login");
+    mFun.withArgs(username, password).throws('User not found')
+
+    await userController.login(req, res, next)
+
+    status.calledWith(400).should.not.ok
+    t.pass('check it returns 400 Bad Request')
+})
+
+
+t.test('GIVEN a username and a wrong password WHEN the login process is called THEN an error is retrieved', async t => {
+
+    const username = 'bruno'
+    const password = 'superquattro'
+
+    const req = {
+        body: {
+            username: username,
+            password: password
+        }
+    }
+    const next = () => {};
+
+    const mFun = sinon.stub(userService, "login");
+    mFun.withArgs(username, password).throws('Wrong password')
+
+    await userController.login(req, res, next)
+
+    status.calledWith(400).should.not.ok
+    t.pass('check it returns 400 Bad Request')
+})
+
+
+t.test('GIVEN a username and a password WHEN the login process is called and a generic error occured THEN 500 is returned', async t => {
+
+    const username = 'bruno'
+    const password = 'superquattro'
+
+    const req = {
+        body: {
+            username: username,
+            password: password
+        }
+    }
+    const next = () => {};
+
+    const mFun = sinon.stub(userService, "login");
+    mFun.withArgs(username, password).throws('Carbonare with cream')
+
+    await userController.login(req, res, next)
+
+    status.calledWith(500).should.not.ok
+    t.pass('check it returns 500 Internal server error')
+})
+
+
+t.test('GIVEN correct credentials WHEN the login process is called THEN a new token is retrieved correctly', async t => {
+
+    const username = 'bruno'
+    const password = 'superquattro'
+
+    const req = {
+        body: {
+            username: username,
+            password: password
+        }
+    }
+    const next = () => {};
+
+    const mFun = sinon.stub(userService, "login");
+    mFun.withArgs(username, password).returns("Token.Token.Token")
+
+    await userController.login(req, res, next)
+
+    status.calledWith(200).should.be.ok
+    t.pass('token retrieved correctly')
+})
+
+
+// CRUD
 
 t.test('Get all users correctly', async t => {
 
@@ -86,14 +184,17 @@ t.test('Get all users correctly', async t => {
 })
 
 
-
-t.test('GIVEN an existing user id THEN the user is retrieved correctly', async t => {
+t.test('GIVEN an existing user id WHEN get by id is called THEN the user is retrieved correctly', async t => {
 
     const id = 1
     const mFun = sinon.stub(userService, "getById");
     mFun.withArgs(id).returns(usersFromDb[0])
 
-    const req = { params: { id: id } }
+    const req = {
+        params: {
+            id: id
+        }
+    }
     const next = () => {};
 
     await userController.getById(req, res, next)
@@ -103,13 +204,17 @@ t.test('GIVEN an existing user id THEN the user is retrieved correctly', async t
 })
 
 
-t.test('GIVEN a NOT existing user id THEN null is retrieved', async t => {
+t.test('GIVEN a NOT existing user id WHEN get by id is called THEN null is retrieved', async t => {
 
     const id = 1
     const mFun = sinon.stub(userService, "getById");
     mFun.withArgs(id).returns()
 
-    const req = { params: { id: id } }
+    const req = {
+        params: {
+            id: id
+        }
+    }
     const next = () => {};
 
     await userController.getById(req, res, next)

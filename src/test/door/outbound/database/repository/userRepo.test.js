@@ -2,6 +2,10 @@ const appRoot = require('app-root-path');
 const t = require('tap');
 const userRepo = require(appRoot + '/src/main/door/outbound/database/repository/userRepo');
 
+
+// TODO MOCK DB
+
+
 t.test('Get all users correctly', async t => {
 
     const users = await userRepo.getAll()
@@ -25,16 +29,34 @@ t.test('GIVEN an existing user id THEN the user is retrieved correctly', async t
         'check it is retrieved correctly',
         async t => t.ok(user)
     )
-    t.test(
-        'check no one has the password exposed',
-        async t => t.ok(!user.password)
-    )
 })
 
 
 t.test('GIVEN a NOT existing user id THEN null is retrieved', async t => {
 
     const user = await userRepo.getById(0)
+
+    t.test(
+        'check it is null',
+        async t => t.notOk(user)
+    )
+})
+
+
+t.test('GIVEN an existing username THEN the user is retrieved correctly', async t => {
+
+    const user = await userRepo.getByUsername('user1')
+
+    t.test(
+        'check it is retrieved correctly',
+        async t => t.ok(user)
+    )
+})
+
+
+t.test('GIVEN a NOT existing username THEN null is retrieved', async t => {
+
+    const user = await userRepo.getByUsername('Franco')
 
     t.test(
         'check it is null',

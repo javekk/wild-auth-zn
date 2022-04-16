@@ -6,6 +6,7 @@ const {
 } = require(appRoot + '/src/main/core/domain/user');
 const userAdapter = require(appRoot + '/src/main/door/outbound/database/adapter/userAdapter');
 const userService = require(appRoot + '/src/main/core/service/userService');
+const tokenService = require(appRoot + '/src/main/core/service/tokenService');
 
 
 
@@ -46,6 +47,61 @@ t.afterEach(t => {
 // test
 
 
+// LOGIN
+
+t.test('GIVEN a NOT existing username WHEN the login process is called THEN an error is retrieved', async t => {
+
+    const username = 'bruno'
+    const password = 'superquattro'
+    const mFun = sinon.stub(userAdapter, "getByUsername");
+    mFun.withArgs(username).returns()
+
+    const result = await userService.login(username, password)
+
+    t.test(
+        'check it is an error',
+        async t => t.match(result, new Error('User not found'))
+    )
+})
+
+
+t.test('GIVEN a username and a wrong password WHEN the login process is called THEN an error is retrieved', async t => {
+
+    const username = 'admin'
+    const password = 'amdin'
+    const mFun = sinon.stub(userAdapter, "getByUsername");
+    mFun.withArgs(username).returns(usersFromDb[0])
+
+    const result = await userService.login(username, password)
+
+    t.test(
+        'check it is an error',
+        async t => t.match(result, new Error('Password is not correct'))
+    )
+})
+
+
+t.test('GIVEN correct credentials WHEN the login process is called THEN a new token is retrieved correctly', async t => {
+
+    const username = 'admin'
+    const password = 'admin'
+    const mFun = sinon.stub(userAdapter, "getByUsername");
+    mFun.withArgs(username).returns(usersFromDb[0])
+
+    const mToken = sinon.stub(tokenService, "sign");
+    mToken.withArgs(usersFromDb[0]).returns('token.token.token')
+
+    const result = await userService.login(username, password)
+    console.log(result)
+    t.test(
+        'check it is correct token',
+        async t => t.ok(result)
+    )
+})
+
+
+
+// CRUD
 
 t.test('Get all users correctly', async t => {
 
@@ -60,7 +116,7 @@ t.test('Get all users correctly', async t => {
 })
 
 
-t.test('GIVEN an existing user id THEN the user is retrieved correctly', async t => {
+t.test('GIVEN an existing user id WHEN get by id is called THEN the user is retrieved correctly', async t => {
 
     const id = 1
     const mFun = sinon.stub(userAdapter, "getById");
@@ -79,7 +135,7 @@ t.test('GIVEN an existing user id THEN the user is retrieved correctly', async t
 })
 
 
-t.test('GIVEN a NOT existing user id THEN null is retrieved', async t => {
+t.test('GIVEN a NOT existing user id WHEN get by id is called THEN null is retrieved', async t => {
 
     const id = 1
     const mFun = sinon.stub(userAdapter, "getById");
@@ -94,8 +150,7 @@ t.test('GIVEN a NOT existing user id THEN null is retrieved', async t => {
 })
 
 
-
-t.test('GIVEN a new user object THEN it is persisted correctly', async t => {
+t.test('GIVEN a new user object WHEN the create user process is called THEN it is persisted correctly', async t => {
 
     const userToPersit = new User(
         username = 'new',

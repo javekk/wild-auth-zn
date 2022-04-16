@@ -1,22 +1,46 @@
 const appRoot = require('app-root-path');
-const userAdapter = require(appRoot + '/src/main/door/outbound/database/adapter/userAdapter');
+const userDao = require(appRoot + '/src/main/door/outbound/database/adapter/userAdapter');
+
+const tokenService = require(appRoot + '/src/main/core/service/tokenService');
+
+
+login = async (username, password) => {
+
+    const user = await userDao.getByUsername(username);
+    if (!user)
+        throw 'User not found';
+
+    const validPassword = validatePassword(password, user.password);
+    if (!validPassword)
+        throw 'Wrong password';
+
+    return await tokenService.sign(user);
+}
 
 
 getAll = async () => {
-    return await userAdapter.getAll();
+    return await userDao.getAll();
 }
 
+
 getById = async (id) => {
-    return await userAdapter.getById(id);
+    return await userDao.getById(id);
 }
+
 
 createUser = async (user) => {
     // validation layer etc...
-    return await userAdapter.createUser(user);
+    return await userDao.createUser(user);
 }
 
 
+validatePassword = (password, storePassword) => {
+    // TODO compare hashed passwords etc.    
+    return password === storePassword
+}
+
 module.exports = {
+    login,
     getAll,
     getById,
     createUser,

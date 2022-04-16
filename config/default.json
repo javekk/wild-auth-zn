@@ -1,0 +1,9 @@
+{
+  "app": {
+    "main": {
+      "token": {
+        "expiration": "5m"
+      }
+    }
+  }
+}
