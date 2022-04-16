@@ -7,7 +7,7 @@ const {
 
 // Mapper 
 
-function toDB(user) {
+const toDB = (user) => {
     return {
         id: user.id,
         username: user.username,
@@ -18,7 +18,7 @@ function toDB(user) {
     }
 }
 
-function toBL(user) {
+const toBL = (user) => {
     if(user)
         return new User(
             user.id,

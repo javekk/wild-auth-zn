@@ -5,36 +5,37 @@ const {
 } = require(appRoot + '/src/main/core/domain/user');
 const userService = require(appRoot + '/src/main/core/service/userService');
 
+
 getAll = async (req, res, next) => {
     const users = await userService.getAll();
     res.status(200).json(users);
-  }
+}
 
 getById = async (req, res, next) => {
     const id = req.params.id;
     const user = await userService.getById(id);
-    if (!user) 
-        return next(createError(404));
+    if (user)
+        res.status(200).json(user);        
     else
-        res.status(200).json(user);
-  }
+        return next(createError(404));
+}
 
 createUser = async (req, res, next) => {
     try {
         const newUser = req.body
         const createdUser = await userService.createUser(newUser);
-        if (!createdUser) 
-            return next(createError(500));
+        if (createdUser)
+            res.status(201).json(createdUser);
         else
-            res.status(200).json(createdUser);
-      } catch (error) {
+            return next(createError(500));
+    } catch (error) {
         next(error)
-      }
-  }
+    }
+}
 
 
-  module.exports = {
+module.exports = {
     getAll,
     getById,
     createUser,
-  }
+}
