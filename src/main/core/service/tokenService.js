@@ -20,6 +20,18 @@ const sign = (user) => {
     );
 }
 
+const isTokenCorrect = async (token) => {
+    try {
+        const { _, exp } = jwt.verify(token, getSecret());
+        // Check if token has expired
+        return true
+    }
+    catch(error){
+        return false
+    }
+}
+
 module.exports = {
     sign,
+    isTokenCorrect,
 };

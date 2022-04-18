@@ -47,37 +47,40 @@ t.afterEach(t => {
 // test
 
 
+
 // LOGIN
 
 t.test('GIVEN a NOT existing username WHEN the login process is called THEN an error is retrieved', async t => {
 
-    const username = 'bruno'
-    const password = 'superquattro'
-    const mFun = sinon.stub(userAdapter, "getByUsername");
-    mFun.withArgs(username).returns()
+    try {
+        const username = 'bruno'
+        const password = 'superquattro'
+        const mFun = sinon.stub(userAdapter, "getByUsername");
+        mFun.withArgs(username).returns()
 
-    const result = await userService.login(username, password)
-
-    t.test(
-        'check it is an error',
-        async t => t.match(result, new Error('User not found'))
-    )
+        await userService.login(username, password)
+        t.fail('Should not get here');
+    } catch (err) {
+        t.ok(err, 'User not found');
+    }
+    t.end();
 })
 
 
 t.test('GIVEN a username and a wrong password WHEN the login process is called THEN an error is retrieved', async t => {
 
-    const username = 'admin'
-    const password = 'amdin'
-    const mFun = sinon.stub(userAdapter, "getByUsername");
-    mFun.withArgs(username).returns(usersFromDb[0])
+    try {
+        const username = 'admin'
+        const password = 'amdin'
+        const mFun = sinon.stub(userAdapter, "getByUsername");
+        mFun.withArgs(username).returns(usersFromDb[0])
 
-    const result = await userService.login(username, password)
-
-    t.test(
-        'check it is an error',
-        async t => t.match(result, new Error('Password is not correct'))
-    )
+        await userService.login(username, password)
+        t.fail('Should not get here');
+    } catch (err) {
+        t.ok(err,'Password is not correct');
+    }
+    t.end();
 })
 
 

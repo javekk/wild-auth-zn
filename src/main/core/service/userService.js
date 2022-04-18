@@ -8,11 +8,11 @@ login = async (username, password) => {
 
     const user = await userDao.getByUsername(username);
     if (!user)
-        throw 'User not found';
+        throw new Error('User not found');
 
     const validPassword = validatePassword(password, user.password);
     if (!validPassword)
-        throw 'Wrong password';
+        throw new Error('Wrong password');
 
     return await tokenService.sign(user);
 }

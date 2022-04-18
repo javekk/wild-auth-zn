@@ -20,17 +20,25 @@ const login = async (req, res, next) => {
 }
 
 const getAll = async (req, res, next) => {
-    const users = await userService.getAll();
-    res.status(200).json(users);
+    try {
+        const users = await userService.getAll();
+        res.status(200).json(users);
+    } catch (error){
+        next(error);
+    }
 }
 
 const getById = async (req, res, next) => {
-    const id = req.params.id;
-    const user = await userService.getById(id);
-    if (user)
-        res.status(200).json(user);        
-    else
-        next(createError(404, 'user not found'));
+    try {
+        const id = req.params.id;
+        const user = await userService.getById(id);
+        if (user)
+            res.status(200).json(user);        
+        else
+            next(createError(404, 'user not found'));
+    } catch (error){
+        next(error);
+    }
 }
 
 const createUser = async (req, res, next) => {
