@@ -7,7 +7,7 @@ Authentication API developed using Nodejs.
 
 ## API:
 
-##### `api/login`:
+
 
 
 ##### `api/ping`: 
@@ -15,6 +15,8 @@ Authentication API developed using Nodejs.
      
         $ curl -H 'Authorization: Bearer <token got from login> localhost:3000/api/ping 
 
+
+##### `api/login`:
 
 * **POST** login: 
 
