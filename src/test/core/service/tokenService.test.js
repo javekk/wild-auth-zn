@@ -11,6 +11,7 @@ const jwt = require('jsonwebtoken');
 
 t.afterEach(() => {
     delete process.env.JWT_SECRET;
+    sinon.restore();
 });
 
 t.test('Create new token', async t => {
@@ -47,7 +48,6 @@ t.test('Create new token with .env secret', async t => {
     )
 })
 
-
 t.test('Check for token validity', async t => {
     process.env.JWT_SECRET = 'test-secret';
     const token = jwt.sign({id: "1"}, 'test-secret', {expiresIn: "1d"});
@@ -66,4 +66,26 @@ t.test('Check for token validity', async t => {
         'the token is not correct',
         async t => t.equal(await tokenService.isTokenCorrect(token), false)
     )
+})
+
+
+
+t.test('Get Error when role is asked and the token is not valid', async t => {
+    process.env.JWT_SECRET = 'test-secret';
+    const token = jwt.sign({id: "1"}, 'test-secret', {expiresIn: "1s"});
+    const mFun = sinon.stub(jwt, "verify");
+    mFun.throws()
+    t.test(
+        'the token is notvalid',
+        async t => t.notOk(await tokenService.getIdAndRole(token))
+    )
+})
+
+
+t.test('Get role from token', async t => {
+    process.env.JWT_SECRET = 'test-secret';
+    const token = jwt.sign({id: "1", role: "User"}, 'test-secret', {expiresIn: "1s"});
+    const {id, role} = await tokenService.getIdAndRole(token)
+    t.equal(id, "1")
+    t.equal(role, "User")
 })

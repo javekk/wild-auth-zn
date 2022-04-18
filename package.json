@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/javekk/wild-auth-zn",
   "dependencies": {
+    "accesscontrol": "^2.2.1",
     "app-root-path": "^3.0.0",
     "config": "^3.3.7",
     "debug": "~2.6.9",

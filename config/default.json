@@ -2,7 +2,7 @@
   "app": {
     "main": {
       "token": {
-        "expiration": "5m"
+        "expiration": "10m"
       }
     }
   }

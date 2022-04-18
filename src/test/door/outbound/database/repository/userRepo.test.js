@@ -14,10 +14,6 @@ t.test('Get all users correctly', async t => {
         'check size',
         async t => t.equal(4, users.length)
     )
-    t.test(
-        'check no one has the password exposed',
-        async t => t.ok(users.some(u => !u.password))
-    )
 })
 
 

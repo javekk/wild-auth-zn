@@ -10,9 +10,24 @@ router.get('/ping', index.ping);
 
 router.post('/login', userController.login);
 
-router.get('/user', validationController.allowIfLoggedin, userController.getAll);
-router.get('/user/:id',validationController.allowIfLoggedin, userController.getById);
-router.post('/user',validationController.allowIfLoggedin, userController.createUser);
+
+router.get('/user',
+    validationController.allowIfLoggedin,
+    validationController.canAccess('readAny', 'profile'), 
+    userController.getAll
+);
+
+router.get('/user/:id',
+    validationController.allowIfLoggedin,
+    validationController.canAccess('readAny', 'profile'), 
+    userController.getById
+);
+
+router.post('/user',
+    validationController.allowIfLoggedin,
+    validationController.canAccess('updateAny', 'profile'), 
+    userController.createUser
+);
 
 
 module.exports = router;

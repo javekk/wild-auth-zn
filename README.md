@@ -3,17 +3,27 @@ Authentication API developed using Nodejs.
 
 ## Run locally:
 
-    npm start
+To deploy the application locally just run:
+
+    $ npm start
+
+check if the application is running:
+
+    $ curl localhost:3000/api/ping 
+
+run tests:
+
+    $ npm test
+
+
 
 ## API:
-
-
 
 
 ##### `api/ping`: 
 * **GET** Check if the service is alive and running: 
      
-        $ curl -H 'Authorization: Bearer <token got from login> localhost:3000/api/ping 
+        $ curl localhost:3000/api/ping 
 
 
 ##### `api/login`:

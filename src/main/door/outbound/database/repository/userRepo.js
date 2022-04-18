@@ -36,7 +36,6 @@ const users = [{
 
 const getAll = async () => {
     return users.map(user => {
-        delete user.password;
         return user;
     });
 }
@@ -62,7 +61,6 @@ const getByUsername = async (username) => {
 const createUser = async (user) => {
     user.id = Math.max(...users.map(u => u.id)) + 1;
     users.push(user)
-    delete user.password;
     return user
 }
 

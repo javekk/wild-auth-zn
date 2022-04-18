@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 require('dotenv').config()
 
+
 const TOKEN_EXPRIRATION_TIME = config.get('app.main.token.expiration')
 
 
@@ -22,8 +23,7 @@ const sign = (user) => {
 
 const isTokenCorrect = async (token) => {
     try {
-        const { _, exp } = jwt.verify(token, getSecret());
-        // Check if token has expired
+        jwt.verify(token, getSecret());
         return true
     }
     catch(error){
@@ -31,7 +31,18 @@ const isTokenCorrect = async (token) => {
     }
 }
 
+const getIdAndRole = async (token) => {
+    try {
+        const { id, role } = jwt.verify(token, getSecret());
+        return { id, role }
+    }
+    catch(error){
+        return 
+    }
+}
+
 module.exports = {
     sign,
     isTokenCorrect,
+    getIdAndRole
 };
