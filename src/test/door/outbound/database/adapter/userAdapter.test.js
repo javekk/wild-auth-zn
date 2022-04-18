@@ -149,3 +149,37 @@ t.test('GIVEN a new user object THEN it is persisted correctly', async t => {
         async t => t.ok(createdUser)
     )
 })
+
+
+
+
+
+t.test('GIVEN a NOT existing user id  WHEN the role is updated THEN null is retrieved', async t => {
+   
+    sinon.stub(userRepo, "updateRole").returns();
+    const user = await userAdapter.updateRole(0, 'God')
+
+    t.test(
+        'check it is null',
+        async t => t.notOk(user)
+    )
+})
+
+
+t.test('GIVEN an existing user id WHEN the role is updated THEN it is updated correctly', async t => {
+
+    const userToPersit = new User(
+        username = 'new',
+        password = 'new',
+        firstName = 'Carmine',
+        lastName = 'Verdi',
+        role = 'God'
+    )
+    sinon.stub(userRepo, "updateRole").returns(userToPersit);
+    const user = await userAdapter.updateRole(1, 'God')
+
+    t.test(
+        'check it is retrieved correctly',
+        async t => t.ok(user)
+    )
+})

@@ -65,9 +65,21 @@ const createUser = async (user) => {
 }
 
 
+const updateRole = async (id, role) => {
+    const user = users.find(u => u.id === parseInt(id));
+    if (!user)
+        return;
+    else {
+        user.role = role
+        return user;
+    }
+}
+
+
 module.exports = {
     getAll,
     getById,
     getByUsername,
     createUser,
+    updateRole,
 };

@@ -4,7 +4,7 @@ const userDao = require(appRoot + '/src/main/door/outbound/database/adapter/user
 const tokenService = require(appRoot + '/src/main/core/service/tokenService');
 
 
-login = async (username, password) => {
+const login = async (username, password) => {
 
     const user = await userDao.getByUsername(username);
     if (!user)
@@ -18,23 +18,28 @@ login = async (username, password) => {
 }
 
 
-getAll = async () => {
+const getAll = async () => {
     return await userDao.getAll();
 }
 
 
-getById = async (id) => {
+const getById = async (id) => {
     return await userDao.getById(id);
 }
 
 
-createUser = async (user) => {
+const createUser = async (user) => {
     // validation layer etc...
     return await userDao.createUser(user);
 }
 
 
-validatePassword = (password, storePassword) => {
+const updateRole = async (id, role) => {
+    return await userDao.updateRole(id, role)
+}
+
+
+const validatePassword = (password, storePassword) => {
     // TODO compare hashed passwords etc.    
     return password === storePassword
 }
@@ -44,4 +49,5 @@ module.exports = {
     getAll,
     getById,
     createUser,
+    updateRole,
 };

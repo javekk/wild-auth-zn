@@ -52,10 +52,16 @@ const createUser = async (user) => {
     return toBL(createdUser);
 }
 
+const updateRole = async (id, role) => {
+    const user = await userRepo.updateRole(id, role);
+    return toBL(user)
+}
+
 
 module.exports = {
     getAll,
     getById,
     getByUsername,
     createUser,
+    updateRole,
 };

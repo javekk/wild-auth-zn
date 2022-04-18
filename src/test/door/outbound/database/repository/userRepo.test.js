@@ -87,3 +87,31 @@ t.test('GIVEN a new user object THEN it is persisted correctly', async t => {
         async t => t.ok(retrievedUser)
     )
 })
+
+
+
+
+t.test('GIVEN a NOT existing user id  WHEN the role is updated THEN null is retrieved', async t => {
+
+    const user = await userRepo.updateRole(0, 'God')
+
+    t.test(
+        'check it is null',
+        async t => t.notOk(user)
+    )
+})
+
+
+t.test('GIVEN an existing user id WHEN the role is updated THEN it is updated correctly', async t => {
+
+    const user = await userRepo.updateRole(1, 'God')
+
+    t.test(
+        'check it is retrieved correctly',
+        async t => t.ok(user)
+    )
+    t.test(
+        'check it is retrieved correctly',
+        async t => t.equal(user.role, 'God')
+    )
+})
