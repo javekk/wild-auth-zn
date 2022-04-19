@@ -55,3 +55,11 @@ run tests:
     
         $ curl -H 'Authorization: Bearer <token got from login>' localhost:3000/api/user/1 
 
+
+#### `/user/:id/updaterole/:role`:
+* **PATCH**
+        
+        
+        $ curl -X PATCH \ 
+        -H 'Authorization: Bearer <token got from login>' \
+        localhost:3000/api/user/1/updaterole/admin

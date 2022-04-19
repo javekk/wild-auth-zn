@@ -54,10 +54,25 @@ const createUser = async (req, res, next) => {
     }
 }
 
+const updateRole = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const role = req.params.role;
+        const user = await userService.updateRole(id, role)
+        if (user)
+            res.status(200).json(user);        
+        else
+            next(createError(404, 'user not found'));
+    } catch (error){
+        next(error);
+    }
+}
+
 
 module.exports = {
     login,
     getAll,
     getById,
     createUser,
+    updateRole,
 }

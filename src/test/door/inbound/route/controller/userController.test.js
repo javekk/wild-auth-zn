@@ -222,3 +222,111 @@ t.test('GIVEN a NOT existing user id WHEN get by id is called THEN null is retri
     status.calledWith(404).should.not.ok
     t.pass('check it returns 404 NOT FOUND')
 })
+
+
+
+t.test('GIVEN user body WHEN create user is called THEN the user is created correctly', async t => {
+
+    const mFun = sinon.stub(userService, "createUser");
+    mFun.returns(newUser)
+
+    const req = { params: newUser }
+    const next = () => {};
+
+    await userController.createUser(req, res, next)
+
+    status.calledWith(201).should.be.ok
+    t.pass('check it returns 201 OK')
+})
+
+
+t.test('GIVEN user body WHEN create user is called and the user is not created THEN an error is thrown', async t => {
+
+    const mFun = sinon.stub(userService, "createUser");
+    mFun.returns()
+
+    const req = { params: newUser }
+    const next = () => {};
+
+    await userController.createUser(req, res, next)
+
+    status.calledWith(500).should.not.ok
+    t.pass('check it returns 500')
+})
+
+
+
+t.test('GIVEN wrong user body WHEN create user is called THEN an error is thrown', async t => {
+
+    const mFun = sinon.stub(userService, "createUser");
+    mFun.throws()
+
+    const req = { params: newUser }
+    const next = () => {};
+
+    await userController.createUser(req, res, next)
+
+    status.calledWith(500).should.not.ok
+    t.pass('check it returns 500')
+})
+
+
+
+
+
+t.test('GIVEN an id and a role WHEN update role is called THEN the role is updated correctly', async t => {
+
+    const mFun = sinon.stub(userService, "updateRole");
+    mFun.returns(usersFromDb[0])
+
+    const req = { params: {
+        id: '1',
+        role: 'Superdmin',
+    } }
+    const next = () => {};
+
+    await userController.updateRole(req, res, next)
+
+    status.calledWith(200).should.be.ok
+    t.pass('check it returns 201 OK')
+})
+
+
+t.test('GIVEN an id and a role WHEN update role is called and the user is not found THEN an error is thrown', async t => {
+
+    const mFun = sinon.stub(userService, "updateRole");
+    mFun.returns()
+
+    const req = { params: {
+        id: '3',
+        role: 'Superdmin',
+    } }
+    const next = () => {};
+
+    await userController.updateRole(req, res, next)
+
+    status.calledWith(404).should.not.ok
+    t.pass('check it returns 404 not found')
+})
+
+
+
+t.test('GIVEN an id and a role WHEN update role is called and an error happens THEN an error is thrown', async t => {
+
+    const mFun = sinon.stub(userService, "updateRole");
+    mFun.throws()
+
+    const req = { params: {
+        id: '1',
+        role: 'Superdmin',
+    } }
+    const next = () => {};
+
+    await userController.updateRole(req, res, next)
+
+    status.calledWith(500).should.not.ok
+    t.pass('check it returns 500')
+})
+
+
+

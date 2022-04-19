@@ -21,7 +21,7 @@ const sign = (user) => {
     );
 }
 
-const isTokenCorrect = async (token) => {
+const isTokenCorrect =  (token) => {
     try {
         jwt.verify(token, getSecret());
         return true
@@ -31,7 +31,7 @@ const isTokenCorrect = async (token) => {
     }
 }
 
-const getIdAndRole = async (token) => {
+const getIdAndRole = (token) => {
     try {
         const { id, role } = jwt.verify(token, getSecret());
         return { id, role }

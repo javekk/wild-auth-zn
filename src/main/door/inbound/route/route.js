@@ -29,5 +29,11 @@ router.post('/user',
     userController.createUser
 );
 
+router.patch('/user/:id/updaterole/:role',
+    validationController.allowIfLoggedin,
+    validationController.canAccess('updateAny', 'profile'), 
+    userController.updateRole
+);
+
 
 module.exports = router;
