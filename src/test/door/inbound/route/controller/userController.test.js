@@ -299,7 +299,7 @@ t.test('GIVEN an id and a role WHEN update role is called and the user is not fo
 
     const req = { params: {
         id: '3',
-        role: 'Superdmin',
+        role: 'Superadmin',
     } }
     const next = () => {};
 

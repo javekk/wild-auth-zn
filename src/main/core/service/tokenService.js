@@ -13,7 +13,7 @@ const getSecret = () => {
 const sign = (user) => {
     return jwt.sign({
             id: user.id,
-            role: user.role 
+            role: user.role // Not secure for public api
         },
         getSecret(), {
             expiresIn: TOKEN_EXPRIRATION_TIME

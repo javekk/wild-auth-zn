@@ -1,5 +1,5 @@
 const appRoot = require('app-root-path');
-const roles = require(appRoot + '/src/main/core/domain/role');
+const roles = require(appRoot + '/src/main/core/service/roleService');
 
 
 const canAccess = (role, action, resource) => {
