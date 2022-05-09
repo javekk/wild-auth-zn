@@ -77,7 +77,7 @@ $ npm test
     ```
 
 
-##### `api//user/:id/updaterole/:role`:
+##### `api/user/:id/updaterole/:role`:
 
 * **PATCH**: update role on a user. Possible roles are Superadmin, Admin, User:
   
