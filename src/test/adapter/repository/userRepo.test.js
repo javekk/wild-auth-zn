@@ -1,6 +1,6 @@
 const appRoot = require('app-root-path');
 const t = require('tap');
-const userRepo = require(appRoot + '/src/main/door/outbound/database/repository/userRepo');
+const userRepo = require(appRoot + '/src/main/adapter/database/repository/userRepo');
 
 
 // TODO MOCK DB

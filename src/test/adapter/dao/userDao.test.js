@@ -4,8 +4,8 @@ const sinon = require("sinon");
 const {
     User
 } = require(appRoot + '/src/main/core/domain/user');
-const userRepo = require(appRoot + '/src/main/door/outbound/database/repository/userRepo');
-const userAdapter = require(appRoot + '/src/main/door/outbound/database/adapter/userAdapter');
+const userRepo = require(appRoot + '/src/main/adapter/database/repository/userRepo');
+const userAdapter = require(appRoot + '/src/main/adapter/database/dao/userDao');
 
 
 

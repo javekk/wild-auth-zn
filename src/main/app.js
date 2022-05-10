@@ -3,7 +3,7 @@ const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
-const routes = require(appRoot + '/src/main/door/inbound/route/route')
+const routes = require(appRoot + '/src/main/adapter/route/route')
 
 const app = express();
 

@@ -4,7 +4,7 @@ const sinon = require("sinon");
 const chai = require('chai');
 chai.should();
 
-const validationController = require(appRoot + '/src/main/door/inbound/route/controller/validationController');
+const validationController = require(appRoot + '/src/main/door/adapter/controller/validationController');
 const tokenService = require(appRoot + '/src/main/core/service/tokenService');
 const accessService = require(appRoot + '/src/main/core/service/accessService');
 

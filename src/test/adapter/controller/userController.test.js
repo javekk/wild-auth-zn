@@ -8,7 +8,7 @@ chai.should();
 const {
     User
 } = require(appRoot + '/src/main/core/domain/user');
-const userController = require(appRoot + '/src/main/door/inbound/route/controller/userController');
+const userController = require(appRoot + '/src/main/adapter/controller/userController');
 const userService = require(appRoot + '/src/main/core/service/userService');
 
 

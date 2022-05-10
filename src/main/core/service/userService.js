@@ -1,5 +1,5 @@
 const appRoot = require('app-root-path');
-const userDao = require(appRoot + '/src/main/door/outbound/database/adapter/userAdapter');
+const userDao = require(appRoot + '/src/main/adapter/database/dao/userDao');
 
 const tokenService = require(appRoot + '/src/main/core/service/tokenService');
 

@@ -1,5 +1,5 @@
 const appRoot = require('app-root-path');
-const userRepo = require(appRoot + '/src/main/door/outbound/database/repository/userRepo.js');
+const userRepo = require(appRoot + '/src/main/adapter/database/repository/userRepo.js');
 const {
     User
 } = require(appRoot + '/src/main/core/domain/user');

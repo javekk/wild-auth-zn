@@ -4,7 +4,7 @@ const sinon = require("sinon");
 const {
     User
 } = require(appRoot + '/src/main/core/domain/user');
-const userAdapter = require(appRoot + '/src/main/door/outbound/database/adapter/userAdapter');
+const userAdapter = require(appRoot + '/src/main/adapter/database/dao/userDao');
 const userService = require(appRoot + '/src/main/core/service/userService');
 const tokenService = require(appRoot + '/src/main/core/service/tokenService');
 

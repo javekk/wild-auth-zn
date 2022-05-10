@@ -115,11 +115,9 @@ Implement a simple authentication module, which implements a basic [Role-Based A
 This projects implementation follows the [hexagonal architecture architectural pattern](https://en.wikipedia.org/wiki/Hexagonal_architecture_(software)).
 
 * *core*: where the BL resides.
-* *door*: handling of the logic to communicate with the outside.
-	* *inbuound*: other asks us for services. e.g.: REST API
-	* *outbound*: we asks other for services. e.g.: db access
-* *adapater*: contains daos and mappers to go from BL to DTOs and vice verse 
-
+* *adapter*: handling of the logic to communicate with the outside.
+	* *controller*: handling incoming requests
+	* *database*: dao + repo to handle the comunication to the DB
 
 
 ### Access control
