@@ -1,5 +1,5 @@
 # wild-auth-zn
-Authentication API developed using Nodejs.
+Role-based authentication API developed using Nodejs.
 
 
 
