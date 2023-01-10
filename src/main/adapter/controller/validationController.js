@@ -1,8 +1,5 @@
 const appRoot = require('app-root-path');
 const createError = require('http-errors');
-const {
-    User
-} = require(appRoot + '/src/main/core/domain/user');
 const tokenService = require(appRoot + '/src/main/core/service/tokenService');
 const accessService = require(appRoot + '/src/main/core/service/accessService');
 
