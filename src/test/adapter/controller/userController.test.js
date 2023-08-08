@@ -171,16 +171,15 @@ t.test('Get all users correctly', async t => {
 })
 
 
-t.test('Get all users correctly', async t => {
+t.test('Get all users throws an error', async t => {
 
     const req = {}
     const next = () => {};
-    sinon.stub(userService, "getAll").returns(usersFromDb);
+    sinon.stub(userService, "getAll").throws(new Error('generic error'));
 
     await userController.getAll(req, res, next)
-
-    status.calledWith(200).should.be.ok
-    t.pass('check it returns 200 OK')
+    status.calledWith(500).should.not.ok
+    t.pass('check it returns an generic error')
 })
 
 
@@ -201,6 +200,22 @@ t.test('GIVEN an existing user id WHEN get by id is called THEN the user is retr
 
     status.calledWith(200).should.be.ok
     t.pass('check it returns 200 OK')
+})
+
+t.test('GIVEN a bad formed query WHEN get by id is called THEN an error is thrown', async t => {
+
+    const id = 1
+    const req = {
+        paramzzz: {
+            ids: [id]
+        }
+    }
+    const next = () => {};
+
+    await userController.getById(req, res, next)
+
+    status.calledWith(500).should.not.ok
+    t.pass('check it thrown an error')
 })
 
 
